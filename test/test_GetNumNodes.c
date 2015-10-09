@@ -27,3 +27,11 @@ void setUp(void)	{
 }
 
 void tearDown(void){}
+
+//  NULL
+void test_getNumNodes_Vine_has_0_Nodes_should_return_0(void){
+  Node *vine = NULL;
+  
+  int num = getNumNodes(vine);
+  TEST_ASSERT_EQUAL(0,num);
+}
