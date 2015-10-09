@@ -8,9 +8,8 @@
 void rightVineToTree(Node **rightVine){
   Node *root = *rightVine;
   int i;
-  double time = log2( getNumNodes(root) ) - 1;
+  double time = log2( getNumNodes(root) );
    
-  
   for( i=0 ; i<time ; i++){
     leftRotate(&root);
    // leftRotate( &(root->right)) ;

@@ -42,18 +42,18 @@ void test_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
-/**  1                      
-*     \                 
-*      2               
+/**  1                            2     
+*     \            --->         /
+*      2                       1
 */
-void test_rightVineToTree_given_Vine_has_2_node_should_doNothing_because_already_balance(void){
+void test_rightVineToTree_given_Vine_has_2_node_should_try_balance_to_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, NULL, 'b');
   Node *vine = &node1;
 
   rightVineToTree(&vine);
-  TEST_ASSERT_EQUAL_PTR(&node1, vine);
-  TEST_ASSERT_EQUAL_NODE(NULL, &node2, 'b', &node1);
+  TEST_ASSERT_EQUAL_PTR(&node2, vine);
+  TEST_ASSERT_EQUAL_NODE(&node1, NULL, 'b', &node2);
 }
 
 /** 1                          2

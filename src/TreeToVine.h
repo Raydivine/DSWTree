@@ -2,6 +2,6 @@
 #define TreeToVine_H
 #include "Node.h"
 
-void treeToRightVine(Node **rootPtr);
+void treeToRightVine(Node **tree);
 
 #endif // TreeToVine_H
