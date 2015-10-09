@@ -42,11 +42,11 @@ void test_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
-/** 1 
-*    \                 
-*     2                  
+/**  1                      
+*     \                 
+*      2               
 */
-void test_rightVineToTree_given_Vine_has_2_node_should_do_nothing_because_already_balance(void){
+void test_rightVineToTree_given_Vine_has_2_node_should_doNothing_because_already_balance(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, NULL, 'b');
   Node *vine = &node1;
@@ -63,7 +63,7 @@ void test_rightVineToTree_given_Vine_has_2_node_should_do_nothing_because_alread
 *       3
 *          
 */
-void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
+void xtest_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, NULL, 'b');
@@ -78,13 +78,13 @@ void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
 
 /** 1                          2
 *    \                       /   \
-*     2        ---->       1       3
-*      \                            \
-*       3                           4
+*     2        ---->       1       4
+*      \                          /
+*       3                        3
 *        \                          
 *         4   
 */
-void test_rightVineToTree_given_Vine_has_4_node_should_form_tree(void){
+void xtest_rightVineToTree_given_Vine_has_4_node_should_form_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -93,9 +93,11 @@ void test_rightVineToTree_given_Vine_has_4_node_should_form_tree(void){
 
   rightVineToTree(&vine);
   TEST_ASSERT_EQUAL_PTR(&node2, vine);
-  TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
-  TEST_ASSERT_EQUAL_NODE(NULL, &node4, 'b', &node3);
+  TEST_ASSERT_EQUAL_NODE(&node1, &node4, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(&node3, NULL, 'b', &node4);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
-  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
 }
+
+
 
