@@ -3,7 +3,7 @@
 #include "Rotations.h"
 #include <stdio.h>
 
-void rightVineToBalanceTree(Node **rightVine){
+void rightVineToTree(Node **rightVine){
   Node *root = rightVine;
   
 }
