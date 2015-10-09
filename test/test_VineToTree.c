@@ -42,9 +42,9 @@ void test_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
-/**  1                            2     
-*     \            --->         /
-*      2                       1
+/**  1                                
+*     \            
+*      2                       
 */
 void test_rightVineToTree_given_Vine_has_2_node_should_try_balance_to_tree(void){
   setNode(&node1, NULL, &node2, 'b');
@@ -52,8 +52,8 @@ void test_rightVineToTree_given_Vine_has_2_node_should_try_balance_to_tree(void)
   Node *vine = &node1;
 
   rightVineToTree(&vine);
-  TEST_ASSERT_EQUAL_PTR(&node2, vine);
-  TEST_ASSERT_EQUAL_NODE(&node1, NULL, 'b', &node2);
+  TEST_ASSERT_EQUAL_PTR(&node1, vine);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node2, 'b', &node1);
 }
 
 /** 1                          2
@@ -63,7 +63,7 @@ void test_rightVineToTree_given_Vine_has_2_node_should_try_balance_to_tree(void)
 *       3
 *          
 */
-void xtest_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
+void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, NULL, 'b');
@@ -74,6 +74,7 @@ void xtest_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
   TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
+
 }
 
 /** 1                          2
@@ -84,7 +85,7 @@ void xtest_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
 *        \                          
 *         4   
 */
-void xtest_rightVineToTree_given_Vine_has_4_node_should_form_tree(void){
+void test_rightVineToTree_given_Vine_has_4_node_should_form_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -97,6 +98,34 @@ void xtest_rightVineToTree_given_Vine_has_4_node_should_form_tree(void){
   TEST_ASSERT_EQUAL_NODE(&node3, NULL, 'b', &node4);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
+}
+
+/** 1                          2
+*    \                       /   \
+*     2        ---->       1       4
+*      \                          / \
+*       3                        3   5
+*        \                          
+*         4   
+*          \
+*           5
+*
+*/
+void test_rightVineToTree_given_Vine_has_5_node_should_form_tree(void){
+  setNode(&node1, NULL, &node2, 'b');
+  setNode(&node2, NULL, &node3, 'b');
+  setNode(&node3, NULL, &node4, 'b');
+  setNode(&node4, NULL, &node5, 'b');
+  setNode(&node5, NULL, NULL, 'b');
+  Node *vine = &node1;
+
+  rightVineToTree(&vine);
+  TEST_ASSERT_EQUAL_PTR(&node2, vine);
+  TEST_ASSERT_EQUAL_NODE(&node1, &node4, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(&node3, &node5, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node5);
 }
 
 
