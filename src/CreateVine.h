@@ -2,6 +2,6 @@
 #define CreateVine_H
 #include "Node.h"
 
-int createRightVine(Node **unbalacedTree);
+void createRightVine(Node **rootPtr);
 
 #endif // CreateVine_H

@@ -3,10 +3,19 @@
 #include "Rotations.h"
 #include <stdio.h>
 
-int createRightVine(Node **unbalacedTree){
+void createRightVine(Node **rootPtr){
+  Node *root = *rootPtr;
+ 
+  if(root == NULL)
+    return ;
   
-  if(unbalacedTree == NULL)
-    return 0;
-  else
-    return 1;
+  while(root->left !=NULL){
+    rightRotate(&root);
+  }
+  
+  if(root->right != NULL){
+    createRightVine(&(root->right));
+  }
+  
+  *rootPtr = root;
 }

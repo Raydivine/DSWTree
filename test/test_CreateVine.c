@@ -3,7 +3,7 @@
 #include "Node.h"
 #include "InitNode.h"
 #include "CustomAssertion.h"
-//#include "Rotations.h"
+#include "Rotations.h"
 
 Node node1,node2,node3,node4 ,node5, node6, node7, node8, node9, node10, node15; //Share to all test
 
@@ -26,38 +26,55 @@ void tearDown(void){}
 
 /**   Root-> NULL
 *
-*  return 0
 */
 void test_createRightVine_given_NULL_should_return_0(void){
+  Node *root = NULL;
 
-  int ans = createRightVine(NULL);
-  TEST_ASSERT_EQUAL(ans, 0);
+  createRightVine(&root);
 }
 
 /**   Root->  1
 *
-*  return 1
 */
-void test_createRightVine_given_1_no_child_should_return_1(void){
+void test_createRightVine_given_root_no_child_should_return_1(void){
   setNode(&node1, NULL, NULL, 'b');
   Node *root = &node1;
   
-  int ans = createRightVine(&root);
-  TEST_ASSERT_EQUAL(ans, 1);
+  createRightVine(&root);
+  TEST_ASSERT_EQUAL_PTR(&node1, root);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
 /**   Root->  2                 1
 *            /                   \
 *           1         ----->      2
-*
-*  return 1
 */
-void test_createRightVine_given_2_leftChild_1_should_return_2_and_form_Vine(void){
+void test_createRightVine_given_root_leftChild_should_return_2_and_form_Vine(void){
   setNode(&node2, &node1, NULL, 'b');
   setNode(&node1, NULL, NULL, 'b');
   Node *root = &node2;
   
-  // int ans = createRightVine(&node1);
-  // TEST_ASSERT_EQUAL(ans, 1);
+  createRightVine(&root);
+  TEST_ASSERT_EQUAL_PTR(&node1, root);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node2, 'b', &node1);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node2);
+}
+
+/**   Root->  6                 5
+*            / \                 \
+*           5  8       ----->     6
+*                                  \
+*                                   8
+*/
+void xtest_createRightVine_given_root_bothChild_should_return_3_and_form_Vine(void){
+  setNode(&node6, &node5, &node8, 'b');
+  setNode(&node5, NULL, NULL, 'b');
+  setNode(&node8, NULL, NULL, 'b');
+  Node *root = &node6;
+  
+  createRightVine(&root);
+  TEST_ASSERT_EQUAL_PTR(&node5, root);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node5);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node8, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node8);
 }
