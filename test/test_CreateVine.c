@@ -1,22 +1,11 @@
 #include "unity.h"
 #include "CreateVine.h"
 #include "Node.h"
+#include "InitNode.h"
+#include "CustomAssertion.h"
 //#include "Rotations.h"
 
 Node node1,node2,node3,node4 ,node5, node6, node7, node8, node9, node10, node15; //Share to all test
-
-void setNode(Node *target, Node *left, Node *right, char color)	{
-	target->left = left;
-	target->right = right;
-	target->color = color;
-}
-
-void resetNode(Node *target, int data)	{
-	target->left = NULL;
-	target->right = NULL;
-	target->color = 'b';
-	target->data = data;
-}
 
 /* Run reset before test*/
 void setUp(void)	{
@@ -35,8 +24,40 @@ void setUp(void)	{
 
 void tearDown(void){}
 
+/**   Root-> NULL
+*
+*  return 0
+*/
 void test_createRightVine_given_NULL_should_return_0(void){
+
+  int ans = createRightVine(NULL);
+  TEST_ASSERT_EQUAL(ans, 0);
+}
+
+/**   Root->  1
+*
+*  return 1
+*/
+void test_createRightVine_given_1_no_child_should_return_1(void){
+  setNode(&node1, NULL, NULL, 'b');
+  Node *root = &node1;
   
+  int ans = createRightVine(&root);
+  TEST_ASSERT_EQUAL(ans, 1);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
+}
+
+/**   Root->  2                 1
+*            /                   \
+*           1         ----->      2
+*
+*  return 1
+*/
+void test_createRightVine_given_2_leftChild_1_should_return_2_and_form_Vine(void){
+  setNode(&node2, &node1, NULL, 'b');
+  setNode(&node1, NULL, NULL, 'b');
+  Node *root = &node2;
   
-  
+  // int ans = createRightVine(&node1);
+  // TEST_ASSERT_EQUAL(ans, 1);
 }
