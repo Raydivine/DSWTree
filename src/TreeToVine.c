@@ -3,7 +3,7 @@
 #include "Rotations.h"
 #include <stdio.h>
 
-void createRightVine(Node **rootPtr){
+void treeToRightVine(Node **rootPtr){
   Node *root = *rootPtr;
  
   if(root == NULL)
@@ -14,7 +14,7 @@ void createRightVine(Node **rootPtr){
   }
   
   if(root->right != NULL){
-    createRightVine(&(root->right));
+    treeToRightVine(&(root->right));
   }
   
   *rootPtr = root;

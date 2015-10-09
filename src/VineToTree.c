@@ -4,6 +4,6 @@
 #include <stdio.h>
 
 void rightVineToTree(Node **rightVine){
-  Node *root = rightVine;
+  Node *root = *rightVine;
   
 }

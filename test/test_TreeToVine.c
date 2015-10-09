@@ -23,26 +23,26 @@ void setUp(void)	{
 
 void tearDown(void){}
 
-// THE TESTS BELOW IS THE CASES WHILE createRightVine() TAKE NO ACTION
+// THE TESTS BELOW IS THE CASES WHILE treeToRightVine() TAKE NO ACTION
 
 /**   Root-> NULL
 *
 */
-void test_createRightVine_given_NULL_should_do_nothing(void){
+void test_treeToRightVine_given_NULL_should_do_nothing(void){
   Node *root = NULL;
 
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_NULL(root);
 }
 
 /**   Root->  1
 *
 */
-void test_createRightVine_given_root_no_child_should_do_nothing(void){
+void test_treeToRightVine_given_root_no_child_should_do_nothing(void){
   setNode(&node1, NULL, NULL, 'b');
   Node *root = &node1;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node1, root);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
@@ -51,12 +51,12 @@ void test_createRightVine_given_root_no_child_should_do_nothing(void){
 *              \                 
 *               6         
 */
-void test_createRightVine_given_root_is_rightVine_with_2_node_should_do_nothing(void){
+void test_treeToRightVine_given_root_is_rightVine_with_2_node_should_do_nothing(void){
   setNode(&node2, NULL, &node6, 'b');
   setNode(&node6, NULL, NULL, 'b');
   Node *root = &node2;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node6);
@@ -68,13 +68,13 @@ void test_createRightVine_given_root_is_rightVine_with_2_node_should_do_nothing(
 *                \       
 *                 8
 */
-void test_createRightVine_given_root_is_rightVine_with_3_node_should_do_nothing(void){
+void test_treeToRightVine_given_root_is_rightVine_with_3_node_should_do_nothing(void){
   setNode(&node2, NULL, &node6, 'b');
   setNode(&node6, NULL, &node8, 'b');
   setNode(&node8, NULL, NULL, 'b');
   Node *root = &node2;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node8, 'b', &node6);

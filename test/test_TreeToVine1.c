@@ -32,12 +32,12 @@ void tearDown(void){}
 *            /                   \
 *           1         ----->      2
 */
-void test_createRightVine_given_root_is_leftVine_with_2_node_should_form_RightVine(void){
+void test_treeToRightVine_given_root_is_leftVine_with_2_node_should_form_RightVine(void){
   setNode(&node2, &node1, NULL, 'b');
   setNode(&node1, NULL, NULL, 'b');
   Node *root = &node2;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node1, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node2, 'b', &node1);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node2);
@@ -50,13 +50,13 @@ void test_createRightVine_given_root_is_leftVine_with_2_node_should_form_RightVi
 *         2                         9
 *
 */
-void test_createRightVine_given_root_is_leftVine_with_3_node_should_form_RightVine(void){
+void test_treeToRightVine_given_root_is_leftVine_with_3_node_should_form_RightVine(void){
   setNode(&node9, &node6, NULL, 'b');
   setNode(&node6, &node2, NULL, 'b');
   setNode(&node2, NULL, NULL, 'b');
   Node *root = &node9;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node9, 'b', &node6);
@@ -71,14 +71,14 @@ void test_createRightVine_given_root_is_leftVine_with_3_node_should_form_RightVi
 *                                          \               
 *                                           14
 */
-void test_createRightVine_given_root_is_unBalance_with_4_node_should_form_RightVine(void){
+void test_treeToRightVine_given_root_is_unBalance_with_4_node_should_form_RightVine(void){
   setNode(&node9, &node6, &node14, 'b');
   setNode(&node6, &node2, NULL, 'b');
   setNode(&node2, NULL, NULL, 'b');
   setNode(&node14, NULL, NULL, 'b');
   Node *root = &node9;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node9, 'b', &node6);
@@ -93,7 +93,7 @@ void test_createRightVine_given_root_is_unBalance_with_4_node_should_form_RightV
 *         2  8                           
 *                                                                                                                                  
 */
-void test_createRightVine_given_root_is_unBalance_with_5_node_should_form_RightVine(void){
+void test_treeToRightVine_given_root_is_unBalance_with_5_node_should_form_RightVine(void){
   setNode(&node9, &node6, &node14, 'b');
   setNode(&node6, &node2, &node8, 'b');
   setNode(&node2, NULL, NULL, 'b');
@@ -101,7 +101,7 @@ void test_createRightVine_given_root_is_unBalance_with_5_node_should_form_RightV
   setNode(&node8, NULL, NULL, 'b');
   Node *root = &node9;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node8, 'b', &node6);
@@ -117,7 +117,7 @@ void test_createRightVine_given_root_is_unBalance_with_5_node_should_form_RightV
 *       2   8  11                         
 *                                                                                                                                  
 */
-void test_createRightVine_given_root_got_6_node_should_form_RightVine(void){
+void test_treeToRightVine_given_root_got_6_node_should_form_RightVine(void){
   setNode(&node9, &node6, &node14, 'b');
   setNode(&node6, &node2, &node8, 'b');
   setNode(&node2, NULL, NULL, 'b');
@@ -126,7 +126,7 @@ void test_createRightVine_given_root_got_6_node_should_form_RightVine(void){
   setNode(&node11, NULL, NULL, 'b');
   Node *root = &node9;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node8, 'b', &node6);
@@ -143,7 +143,7 @@ void test_createRightVine_given_root_got_6_node_should_form_RightVine(void){
 *       2   8  11   15                      
 *                                                                                                                                  
 */
-void test_createRightVine_given_root_got_7_node_should_form_RightVine(void){
+void test_treeToRightVine_given_root_got_7_node_should_form_RightVine(void){
   setNode(&node9, &node6, &node14, 'b');
   setNode(&node6, &node2, &node8, 'b');
   setNode(&node2, NULL, NULL, 'b');
@@ -153,7 +153,7 @@ void test_createRightVine_given_root_got_7_node_should_form_RightVine(void){
   setNode(&node15, NULL, NULL, 'b');
   Node *root = &node9;
   
-  createRightVine(&root);
+  treeToRightVine(&root);
   TEST_ASSERT_EQUAL_PTR(&node2, root);
   TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node8, 'b', &node6);
