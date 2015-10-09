@@ -35,3 +35,45 @@ void test_getNumNodes_Vine_has_0_Nodes_should_return_0(void){
   int num = getNumNodes(vine);
   TEST_ASSERT_EQUAL(0,num);
 }
+
+//  1
+void test_getNumNodes_Vine_has_1_Nodes_should_return_1(void){
+  setNode(&node1, NULL, NULL, 'b');
+  Node *vine = &node1;
+  
+  int num = getNumNodes(vine);
+  TEST_ASSERT_EQUAL(1,num);
+}
+
+//  1-2
+void test_getNumNodes_Vine_has_2_Nodes_should_return_2(void){
+  setNode(&node1, NULL, &node2, 'b');
+  setNode(&node2, NULL, NULL, 'b');
+  Node *vine = &node1;
+  
+  int num = getNumNodes(vine);
+  TEST_ASSERT_EQUAL(2,num);
+}
+
+//  1-2-3
+void test_getNumNodes_Vine_has_3_Nodes_should_return_3(void){
+  setNode(&node1, NULL, &node2, 'b');
+  setNode(&node2, NULL, &node3, 'b');
+  setNode(&node3, NULL, NULL, 'b');
+  Node *vine = &node1;
+  
+  int num = getNumNodes(vine);
+  TEST_ASSERT_EQUAL(3,num);
+}
+
+//  1-2-3-4
+void test_getNumNodes_Vine_has_4_Nodes_should_return_4(void){
+  setNode(&node1, NULL, &node2, 'b');
+  setNode(&node2, NULL, &node3, 'b');
+  setNode(&node3, NULL, &node4, 'b');
+  setNode(&node4, NULL, NULL, 'b');
+  Node *vine = &node1;
+  
+  int num = getNumNodes(vine);
+  TEST_ASSERT_EQUAL(4,num);
+}
