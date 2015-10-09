@@ -7,7 +7,7 @@ void createRightVine(Node **rootPtr){
   Node *root = *rootPtr;
  
   if(root == NULL)
-    return ;
+    return;
   
   while(root->left !=NULL){
     rightRotate(&root);
