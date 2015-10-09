@@ -136,3 +136,30 @@ void test_createRightVine_given_root_got_6_node_should_form_RightVine(void){
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node14);
 }
 
+/**   Root->   9                       
+*            /   \                       
+*          6      14       ----->    2-6-8-9-11-14-15    
+*         / \   /   \                      
+*       2   8  11   15                      
+*                                                                                                                                  
+*/
+void test_createRightVine_given_root_got_7_node_should_form_RightVine(void){
+  setNode(&node9, &node6, &node14, 'b');
+  setNode(&node6, &node2, &node8, 'b');
+  setNode(&node2, NULL, NULL, 'b');
+  setNode(&node14, &node11, &node15, 'b');
+  setNode(&node8, NULL, NULL, 'b');
+  setNode(&node11, NULL, NULL, 'b');
+  setNode(&node15, NULL, NULL, 'b');
+  Node *root = &node9;
+  
+  createRightVine(&root);
+  TEST_ASSERT_EQUAL_PTR(&node2, root);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node8, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node9, 'b', &node8);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node11, 'b', &node9);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node14, 'b', &node11);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node15, 'b', &node14);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node15);
+}
