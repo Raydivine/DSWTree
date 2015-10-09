@@ -6,8 +6,15 @@
 #include <stdio.h>
 
 void rightVineToTree(Node **rightVine){
+  double num, time;
+  int i, j;
   Node *root = *rightVine;
+  num = getNumNodes(root);
+  time = log2(num) - 1;
   
-  int num = getNumNodes(root);
-  int time = log2(num) - 1;
+  for( i=0 ; i<time ; i++){
+    leftRotate(&root);
+  }
+  
+  *rightVine = root;
 }
