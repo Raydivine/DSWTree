@@ -53,7 +53,7 @@ void xtest_compress_given_Vine_has_7_node_and_compress_0_times_should_no_compres
   setNode(&node7, NULL, NULL, 'b');
   Node *vine = &node1;
 
-  compress(&vine, 0);
+ // compress(&vine, 0);
   TEST_ASSERT_EQUAL_PTR(&node1, vine);
   TEST_ASSERT_EQUAL_NODE(NULL, &node3, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node4, 'b', &node3);
@@ -89,7 +89,7 @@ void xtest_compress_given_Vine_has_7_node_and_compress_1_times_should_change(voi
   setNode(&node7, NULL, NULL, 'b');
   Node *vine = &node1;
 
-  compress(&vine, 1);
+//  compress(&vine, 1);
   TEST_ASSERT_EQUAL_PTR(&node2, vine);
   TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node4, 'b', &node3);
@@ -126,7 +126,6 @@ void test_compress_given_Vine_has_7_node_and_compress_2_times_should_change(void
   Node *vine = &node1;
 
   compress(&vine,2);
-  printf("%d\n",(node2.right)->data);
   TEST_ASSERT_EQUAL_PTR(&node2, vine);
   TEST_ASSERT_EQUAL_NODE(&node1, &node4, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(&node3, &node5, 'b', &node4);
