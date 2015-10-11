@@ -27,6 +27,42 @@ void tearDown(void){}
 // Test Termv: LR(root)  = leftRotate(root),  LR(rChild) = LeftRotate(rigthChild)
 
 
+/**                                           
+*   1                                  
+*    \               
+*     2             
+*      \                                          
+*       3                                       
+*        \                                           
+*         4                                                      
+*          \                                              
+*           5                                             
+*            \                  
+*             6
+*              \
+*               7
+*
+*/
+void xtest_compress_given_Vine_has_7_node_and_compress_0_times_should_no_compress(void){
+  setNode(&node1, NULL, &node2, 'b');
+  setNode(&node2, NULL, &node3, 'b');
+  setNode(&node3, NULL, &node4, 'b');
+  setNode(&node4, NULL, &node5, 'b');
+  setNode(&node5, NULL, &node6, 'b');
+  setNode(&node6, NULL, &node7, 'b');
+  setNode(&node7, NULL, NULL, 'b');
+  Node *vine = &node1;
+
+  compress(&vine, 0);
+  TEST_ASSERT_EQUAL_PTR(&node1, vine);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node3, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node4, 'b', &node3);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node5, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node6, 'b', &node5);
+  TEST_ASSERT_EQUAL_NODE(NULL, &node7, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node7);
+}
+
 /**                     1st time                      
 *   1                    2                    
 *    \         LR(root) /  \       
@@ -53,7 +89,7 @@ void xtest_compress_given_Vine_has_7_node_and_compress_1_times_should_change(voi
   setNode(&node7, NULL, NULL, 'b');
   Node *vine = &node1;
 
-//  compress(&vine, 2);
+  compress(&vine, 1);
   TEST_ASSERT_EQUAL_PTR(&node2, vine);
   TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, &node4, 'b', &node3);
@@ -89,8 +125,8 @@ void test_compress_given_Vine_has_7_node_and_compress_2_times_should_change(void
   setNode(&node7, NULL, NULL, 'b');
   Node *vine = &node1;
 
-  compress(*vine,2);
- // printf("%d\n",(node2.right)->data);
+  compress(&vine,2);
+  printf("%d\n",(node2.right)->data);
   TEST_ASSERT_EQUAL_PTR(&node2, vine);
   TEST_ASSERT_EQUAL_NODE(&node1, &node4, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(&node3, &node5, 'b', &node4);
