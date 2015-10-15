@@ -21,18 +21,22 @@ void rightVineToTree(Node **rightVine){
   *rightVine = root;
 }
 
-void compress(Node *rootPtr, int times){
+void compress(Node rootPtr, int times){
   int i;
-  Node  *child = rootPtr, *root = rootPtr->right;
+  Node  *scanner = &rootPtr;
 
 
   for(i=0; i<times; i++){
-    leftRotate( &(child));
-    child = child->right;
+    Node *child = scanner->right;
+    scanner->right = child->right;
+    scanner = scanner->right;
+    child->right = scanner->left;
+    scanner->left = child;
   }
-     // printf("%d\n",child->data);
+   //  printf("%d\n",rootPtr->data);
      // printf("%d\n",root->data);
      // printf("%d\n",(root->right)->data);
+  //   rootPtr = scanner;
    
 }
 
