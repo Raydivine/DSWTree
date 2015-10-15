@@ -3,6 +3,6 @@
 #include "Node.h"
 
 void rightVineToTree(Node **rightVine);
-int getTimesToDoLeftRotate(Node *rightVine);
+void compress(Node **rootPtr, int times);
 
 #endif // VineToTree_H
