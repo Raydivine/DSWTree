@@ -22,11 +22,13 @@ void rightVineToTree(Node **rightVine){
 }
 
 void compress(Node **rootPtr, int times){
-  Node *root = *rootPtr;
   int i;
+  Node *root = (*rootPtr)->right, *child = *rootPtr;
+
+
   for(i=0; i<times; i++){
-    leftRotate(&root);
-    root = root->right;
+    leftRotate( &(child));
+    child = child->right;
   }
   
   *rootPtr = root;
