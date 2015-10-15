@@ -7,17 +7,23 @@
 
 void rightVineToTree(Node **rightVine){
   Node *root = *rightVine;
-  int i, j , num = getNumNodes(root), time = (int)log2(num);
+  int i, j , n = getNumNodes(root), m = pow( 2, floor(log2(n+1))) -1;
 
-  for(i=0; i<time; i++){
+  for(i=0; i<n-m; i++){
     leftRotate(&root);
-    
-    for(j=0; j<(num/2-1); j++)
-      leftRotate( &(root->right)) ;
+    root = root->right;
   }
+    
+    // for(j=0; j<(num/2-1); j++)
+      // leftRotate( &(root->right)) ;
+ // }
   
   *rightVine = root;
 }
 
-
+void compress(Node **rootPtr, int times){
+  
+  
+  
+}
 
