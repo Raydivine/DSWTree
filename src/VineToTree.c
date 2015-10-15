@@ -7,13 +7,12 @@
 
 void rightVineToTree(Node **rightVine){
   Node *root = *rightVine;
-  double x = log2( getNumNodes(root)) ;
-  int i, time = round(x)-1;
+  int i, j , num = getNumNodes(root), time = (int)log2(num);
 
   for(i=0; i<time; i++){
     leftRotate(&root);
     
-    if( root->right->right )
+    for(j=0; j<(num/2-1); j++)
       leftRotate( &(root->right)) ;
   }
   
