@@ -3,6 +3,6 @@
 #include "Node.h"
 
 void treeToRightVine(Node **tree);
-void void compress(Node **rootPtr, int times);
+void compress(Node **rootPtr, int times);
 
 #endif // TreeToVine_H
