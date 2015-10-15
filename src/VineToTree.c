@@ -27,7 +27,7 @@ void compress(Node **rootPtr, int times){
   
 }
 
-void getTimesForCompress(Node **rootPtr){
+void getTimesOfCompress(Node **rootPtr){
   
   
   

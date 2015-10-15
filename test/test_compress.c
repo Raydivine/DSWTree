@@ -67,7 +67,7 @@ void xtest_compress_given_Vine_has_2_node_should_do_nothing_becuz_it_is_balance(
 *       3
 *          
 */
-void test_compress_given_Vine_has_3_node_should_form_tree(void){
+void xtest_compress_given_Vine_has_3_node_should_form_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, NULL, 'b');
