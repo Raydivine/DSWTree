@@ -26,34 +26,28 @@ void printVine(Node *root){
   }
 }
 
+  // printf("root: %d\n",root->data);
+  // printVine(root);
+  // leftRotate(&current);
+  // printf("root: %d\n",root->data);
+  // printVine(root);
+
+
 void compress(Node **rootPtr, int times){
   int i;
-  Node *root = *rootPtr, *current = root->right->right;
-  
-      // printf("root: %d\n",root->data);
-     // printVine(root);
-  
+  Node *root = *rootPtr, *current;
   
   if(times >0){
     leftRotate(&root);
- //   current = root->right;
+    current = root->right;
   }
-      // printf("current: %d\n",current->data);
-     // printVine(current);
-
+   
   for(i=1; i<times; i++){
-     printf("root: %d\n",root->data);
-    printVine(root);
     leftRotate(&current);
-    printf("root: %d\n",root->data);
-    printVine(root);
-
     replaceRightEndToNewNode( &root, current);
     current = current->right;
   }
   *rootPtr = root;
- // printVine(*rootPtr);
- // printVine(current);
 }
 
 void replaceRightEndToNewNode(Node **rootPtr, Node *newNode){
