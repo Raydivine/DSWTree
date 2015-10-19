@@ -57,32 +57,3 @@ void replaceRightEndToNewNode(Node **rootPtr, Node *newNode){
   
 }
 
-/*
-void compress(Node **rootPtr, int times){
-  int i;
-  Node *root = *rootPtr;
-  
-  for(i=1; i<times; i++){
-    leftRotate(&root);
-    root = root->right;
-  }
-  *rootPtr = root;
-}
-*/
-
-/*
-void compress(Node **rootPtr, int times){
-  int i;
-  Node *scanner = *rootPtr;
-  
-  for(i=0; i<times; i++){
-    Node *child = scanner->right;
-    scanner->right = child->right;
-    scanner = scanner->right;
-    child->right = scanner->left;
-    scanner->left =child;
-  }
-//  printVine(scanner);
-  *rootPtr = scanner;
-}
-*/

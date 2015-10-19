@@ -157,5 +157,3 @@ void test_replaceRightEndToNewNode_given_rightEnd_is_6_should_replace(void){
   TEST_ASSERT_EQUAL_NODE(&node3, &node5, 'b', &node4);
   TEST_ASSERT_EQUAL_NODE(NULL, &node10, 'b', &node5);
 }
-
-
