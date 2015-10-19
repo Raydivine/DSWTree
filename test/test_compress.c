@@ -19,7 +19,7 @@ void setUp(void)	{
 	resetNode(&node8, 8);
 	resetNode(&node9, 9);
 	resetNode(&node10, 10);
-	resetNode(&node10, 15);
+	resetNode(&node15, 15);
 }
 
 void tearDown(void){}
@@ -77,7 +77,7 @@ void test_compress_given_Vine_has_7_node_and_compress_0_times_should_no_compress
 /**     compress 1 times   
 *                    1st time                      
 *   1(c)                  2                    
-*    \         LR(root) /  \       
+*    \                  /  \       
 *     2        ---->   1    3       
 *      \                     \                       
 *       3                     4                    
@@ -198,7 +198,7 @@ void test_compress_given_Vine_has_7_node_and_compress_3_times_should_change(void
 *          \                      \                        \                      \                 /
 *           5(c)                   6                       7(c)                    8               7
 *            \                      \                       \ 
-*             6                      7(c)                   8
+*             6                      7(c)                    8
 *              \                      \
 *               7(c)                   8
 *                \
