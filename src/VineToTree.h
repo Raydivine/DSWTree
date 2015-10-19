@@ -4,5 +4,6 @@
 
 void rightVineToTree(Node **rightVine);
 void compress(Node **rootPtr, int times);
+void replaceRightEndToNewNode(Node **rootPtr, Node *newNode);
 
 #endif // VineToTree_H
