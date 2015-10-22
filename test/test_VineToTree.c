@@ -27,28 +27,33 @@ void tearDown(void){}
 /**    void rightVineToTree(Node **rightVine)
 *      
 *      Convert the in-order list to a balanced tree, it has a sub function call compress(), 
-*      which is doing leftRotation from top to Bottom.
-*      How to do the compress() , is follow the DSW algorithm solution
+*      which is doing leftRotation (compression) from top to Bottom.
+*      The process to do compress() is follow the DSW algorithm solution
 *      This function reference is taking from this site
 *      http://courses.cs.vt.edu/cs2604/spring05/mcpherson/note/BalancingTrees.pdf
 *      which locate at page 7 , under createPerfectTree()
+*
+*      The functions will first generate a 2 parameter , which are n and m
+*      n = number of nodes of the vine ,  m = pow(2, floor(log2(n+1)))- 1  
 *   
 * ----------------------------------------------
-*       compress( &root, n-m );    // First compress
+*       compress( &root, n-m );    // First stage
 *
 *     while( m>1 ){
 *       m = floor( m/2 );
-*       compress( &root, m );     // Second compress
+*       compress( &root, m );     // Second stage
 *     }
 *--------------------------------------
 *
+*     the functions got 2 stage of compress, 
+*     first stage is compres(n-m) time from top to bottom
+*     Second stage is while m big than 1 , then  m divide by 2 , keep doing  compress(m) times, until m is not equal or smaller then one.
 *
 * TEST TERM
-*   C : compress
 *
 *  First compress : c1(n-m)
 *
-* Second compress : c2(m) , where m = m /2 
+* Second compress : c2(m) , where m = m /2  while m >1 
 *
 *  leftRotation  :  R  
 */
@@ -84,7 +89,7 @@ void test_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
 *     \   -->    /      
 *      2        1                 
 */
-void test_rightVineToTree_given_Vine_has_2_node_should_do_leftRotation_once(void){
+void test_rightVineToTree_given_Vine_has_2_node_should_do_c1(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, NULL, 'b');
   Node *vine = &node1;
@@ -95,10 +100,10 @@ void test_rightVineToTree_given_Vine_has_2_node_should_do_leftRotation_once(void
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
-/**  n = 3,     m = 2^[Floor(log2 (3+1))] - 1 
+/**  n = 3,     m = 2^[Floor(log2 (3+1))] - 1     c2(3/2) = c2(1)
 *                 = 3
 *
-*                                    c2(1)
+*                                    c2(1)    
 *   1(R)                               2
 *    \                              /   \
 *     2        ---->              1       3
@@ -106,7 +111,7 @@ void test_rightVineToTree_given_Vine_has_2_node_should_do_leftRotation_once(void
 *       3
 *          
 */
-void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
+void test_rightVineToTree_given_Vine_has_3_node_should_do_c2_but_not_c1_because_n_and_m_are_equal(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, NULL, 'b');
@@ -132,7 +137,7 @@ void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
 *        \                          
 *         4   
 */
-void test_rightVineToTree_given_Vine_has_4_node_should_form_tree_and_left_Rotate_rightChild(void){
+void test_rightVineToTree_given_Vine_has_4_node_should_form_do_c1_and_c2(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -162,7 +167,7 @@ void test_rightVineToTree_given_Vine_has_4_node_should_form_tree_and_left_Rotate
 *           5
 *
 */
-void test_rightVineToTree_given_Vine_has_5_node_should_form_tree(void){
+void test_rightVineToTree_given_Vine_has_5_node_should_do_c1_and_c2(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -195,7 +200,7 @@ void test_rightVineToTree_given_Vine_has_5_node_should_form_tree(void){
 *            \
 *             6
 */
-void test_rightVineToTree_given_Vine_has_6_node_should_form_tree_and_do_step_2times(void){
+void test_rightVineToTree_given_Vine_has_6_node_should_form_tree_and_do_c1_and_c2(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -233,7 +238,7 @@ void test_rightVineToTree_given_Vine_has_6_node_should_form_tree_and_do_step_2ti
 *               7
 *
 */
-void test_rightVineToTree_given_Vine_has_7_node_should_form_tree_and_do_step_2times(void){
+void test_rightVineToTree_given_Vine_has_7_node_should_do_c2_2times(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -278,7 +283,7 @@ void test_rightVineToTree_given_Vine_has_7_node_should_form_tree_and_do_step_2ti
 *                   9
 *               
 */
-void test_rightVineToTree_given_Vine_has_9_node_should_form_tree_and_do_step_2times(void){
+void test_rightVineToTree_given_Vine_has_9_node_should_do_c1_and_c2_two_times(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -291,7 +296,6 @@ void test_rightVineToTree_given_Vine_has_9_node_should_form_tree_and_do_step_2ti
   Node *vine = &node1;
 
   rightVineToTree(&vine);
-  printVine(vine);
   TEST_ASSERT_EQUAL_PTR(&node6, vine);
   TEST_ASSERT_EQUAL_NODE(&node4, &node8, 'b', &node6);
   TEST_ASSERT_EQUAL_NODE(&node2, &node5, 'b', &node4);
