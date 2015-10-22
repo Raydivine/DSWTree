@@ -38,22 +38,16 @@ void compress(Node **rootPtr, int times){
   for(i=0; i<times;i++){
     _compress( &(*rootPtr), i );
   }
+  
 }  
 
 void _compress(Node **rootPtr, int times){
  
-  if(times ==0){
+  if(times ==0)
     leftRotate(&(*rootPtr));
-   // return;
-  }
-  else {
- 
-//    times = times -1;
-    _compress( &((*rootPtr)->right), times-1);
-  }
-  
+  else 
+    _compress( &((*rootPtr)->right), times-1);  
 }  
-    //printVine((*rootPtr));
   
   
 /*

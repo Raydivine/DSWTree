@@ -53,7 +53,7 @@ void tearDown(void){}
 *          9   15
 *
 */
-void xtest_compress_given_Vine_leftChilds_compress_1_times_should_change(void){
+void test_compress_given_Vine_leftChilds_compress_1_times_should_change(void){
   setNode(&node2, &node1, &node4, 'b');
   setNode(&node4, &node3, &node6, 'b');
   setNode(&node6, &node5, &node8, 'b');
