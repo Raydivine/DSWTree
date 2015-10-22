@@ -44,12 +44,12 @@ void _compress(Node **rootPtr, int times){
  
   if(times ==0){
     leftRotate(&(*rootPtr));
-    return;
+   // return;
   }
   else {
  
-    times = times -1;
-    _compress( &((*rootPtr)->right), times);
+//    times = times -1;
+    _compress( &((*rootPtr)->right), times-1);
   }
   
 }  
