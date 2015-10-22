@@ -6,7 +6,7 @@
 #include "GetNumNodes.h"
 #include "Rotations.h"
 
-Node node1,node2,node3,node4 ,node5, node6, node7, node8, node9, node10, node15; //Share to all test
+Node node1,node2,node3,node4 ,node5, node6, node7, node8, node9, node10, node15, node16; //Share to all test
 
 void setUp(void)	{
 	resetNode(&node1, 1);
@@ -20,6 +20,7 @@ void setUp(void)	{
 	resetNode(&node9, 9);
 	resetNode(&node10, 10);
 	resetNode(&node15, 15);
+	resetNode(&node16, 16);
 }
 
 void tearDown(void){}
@@ -37,6 +38,49 @@ void tearDown(void){}
 *   Test Term: (c) means  compress , doing rightRotation
 */
 
+/**     compress 0 times   
+*                                            
+*     2(c)                                    
+*    / \                    
+*   1   4              
+*      / \                                  
+*     3   6                              
+*        / \                                         
+*       5   8                                                 
+*          / \                                         
+*         7  10                                       
+*           /  \                  
+*          9   15
+*
+*/
+void test_compress_given_Vine_leftChilds_compress_0_times_should_no_change(void){
+  setNode(&node2, &node1, &node4, 'b');
+  setNode(&node4, &node3, &node6, 'b');
+  setNode(&node6, &node5, &node8, 'b');
+  setNode(&node8, &node7, &node10, 'b');
+  setNode(&node10, &node9, &node15, 'b');
+  setNode(&node1, NULL, NULL, 'b');
+  setNode(&node3, NULL, NULL, 'b');
+  setNode(&node5, NULL, NULL, 'b');
+  setNode(&node7, NULL, NULL, 'b');
+  setNode(&node9, NULL, NULL, 'b');
+  setNode(&node15, NULL, NULL, 'b');
+  Node *vine = &node2;
+
+  compress(&vine, 0);
+  TEST_ASSERT_EQUAL_PTR(&node2, vine);
+  TEST_ASSERT_EQUAL_NODE(&node1, &node4, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(&node3, &node6, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(&node5, &node8, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(&node7, &node10, 'b', &node8);
+  TEST_ASSERT_EQUAL_NODE(&node9, &node15, 'b', &node10);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node5);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node9);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node15);
+}
 
 /**     compress 1 times   
 *                        1st time                      
@@ -112,9 +156,8 @@ void test_compress_given_Vine_leftChilds_compress_2_times_should_change(void){
   Node *vine = &node2;
 
   compress(&vine, 2);
-  // printVine(vine);
   TEST_ASSERT_EQUAL_PTR(&node4, vine);
-  TEST_ASSERT_EQUAL_NODE(&node2, &node6, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(&node2, &node8, 'b', &node4);
   TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(&node6, &node10, 'b', &node8);
   TEST_ASSERT_EQUAL_NODE(&node5, &node7, 'b', &node6);
@@ -125,6 +168,54 @@ void test_compress_given_Vine_leftChilds_compress_2_times_should_change(void){
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node7);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node9);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node15);
+}
+
+/**     compress 3 times   
+*                        1st time               2nd time                3rd time       
+*     2(c)                   4                       4                      4
+*    / \                   /  \                    /  \                   /    \
+*   1   4        ---->   2     6(c)   ---->       2     8       --->     2       8
+*      / \              /\    / \                / \   /  \             /\    /    \
+*     3   6(c)         1  3  5   8              1  3  6     10(c)      1  3  6      15
+*        / \                    / \                  / \   /  \             / \    /  \
+*       5   8                  7  10(c)            5   7  9  15            5   7  10   16
+*          / \                   /  \                          \                  /
+*         7  10(c)              9   15                         16                9
+*           /  \                      \ 
+*          9   15                     16
+*               \
+*               16
+*
+*/
+void test_compress_given_Vine_leftChilds_compress_3_times_should_change(void){
+  setNode(&node2, &node1, &node4, 'b');
+  setNode(&node4, &node3, &node6, 'b');
+  setNode(&node6, &node5, &node8, 'b');
+  setNode(&node8, &node7, &node10, 'b');
+  setNode(&node10, &node9, &node15, 'b');
+  setNode(&node15, NULL, &node16, 'b');
+  setNode(&node1, NULL, NULL, 'b');
+  setNode(&node3, NULL, NULL, 'b');
+  setNode(&node5, NULL, NULL, 'b');
+  setNode(&node7, NULL, NULL, 'b');
+  setNode(&node9, NULL, NULL, 'b');
+  setNode(&node16, NULL, NULL, 'b');
+  Node *vine = &node2;
+
+  compress(&vine, 3);
+  TEST_ASSERT_EQUAL_PTR(&node4, vine);
+  TEST_ASSERT_EQUAL_NODE(&node2, &node8, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(&node6, &node15, 'b', &node8);
+  TEST_ASSERT_EQUAL_NODE(&node5, &node7, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(&node10, &node16, 'b', &node15);
+  TEST_ASSERT_EQUAL_NODE(&node9, NULL, 'b', &node10);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node5);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node9);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
 }
 
 

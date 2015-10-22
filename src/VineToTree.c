@@ -26,19 +26,13 @@ void printVine(Node *root){
   }
 }
 
-  // printf("root: %d\n",root->data);
-  // printVine(root);
-  // leftRotate(&current);
-  // printf("root: %d\n",root->data);
-  // printVine(root);
 
 void compress(Node **rootPtr, int times){
   int i;
  
-  for(i=0; i<times;i++){
+  for(i=0; i<times; i++){
     _compress( &(*rootPtr), i );
-  }
-  
+  }  
 }  
 
 void _compress(Node **rootPtr, int times){
