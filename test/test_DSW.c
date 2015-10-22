@@ -295,6 +295,117 @@ void test_dswTreeBalancing_given_rightSide_has_higher_height_with_8_node_should_
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
 }
 
+/**       
+*       16        ------>         24    
+*      /   \                    /     \
+*     7    24                 20       28
+*        /  \               /  \     /  \
+*      20     28           16   22  26  30
+*     / \    /  \         / \
+*    18 22  26  30       7   18
+*
+*/
+void test_dswTreeBalancing_given_rightSide_height_is_4_leftSide_is_2_should_balance(void){
+  
+  setNode(&node16, &node7, &node24, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+  setNode(&node28, &node26, &node30, 'b');
+  setNode(&node20, &node18, &node22, 'b');
+  setNode(&node18, NULL, NULL, 'b');
+  setNode(&node26, NULL, NULL, 'b');
+  setNode(&node30, NULL, NULL, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node24, root);
+  TEST_ASSERT_EQUAL_NODE(&node20, &node28, 'b', &node24);
+  TEST_ASSERT_EQUAL_NODE(&node16, &node22, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(&node26, &node30, 'b', &node28);
+  TEST_ASSERT_EQUAL_NODE(&node7, &node18, 'b', &node16);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node26);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node30);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node22);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node18);
+}
+
+/**       
+*         16        ------>              24    
+*      /     \                        /     \
+*   7          24                   16        28
+*  /\          /  \               /    \     /  \
+* 4  12      20     28           7      20  26  30  
+*           / \    /  \         / \    /  \
+*          18 22  26  30       4   12 18  22
+*
+*/
+void test_dswTreeBalancing_given_rightSide_height_is_4_leftSide_is_3_should_balance_because_of_this_function_feature(void){
+  
+  setNode(&node16, &node7, &node24, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+  setNode(&node28, &node26, &node30, 'b');
+  setNode(&node20, &node18, &node22, 'b');
+  setNode(&node18, NULL, NULL, 'b');
+  setNode(&node26, NULL, NULL, 'b');
+  setNode(&node30, NULL, NULL, 'b');
+  setNode(&node7, &node4, &node12, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node24, root);
+  TEST_ASSERT_EQUAL_NODE(&node16, &node28, 'b', &node24);
+  TEST_ASSERT_EQUAL_NODE(&node7, &node20, 'b', &node16);
+  TEST_ASSERT_EQUAL_NODE(&node4, &node12, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(&node18, &node22, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(&node26, &node30, 'b', &node28);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node12);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node18);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node22);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node26);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node30);
+}
+
+/**       
+*          16        ------>              22   
+*       /     \                        /      \
+*     7         24                   7            28
+*    /         /  \               /    \         /  \
+*   4        20     28           4      18      26  30  
+*  /\       / \    /  \         / \    /  \     /
+* 2  6     18 22  26  30       2   6  16  20   24
+*
+*/
+void test_dswTreeBalancing_given_rightSide_height_is_4_leftSide_is_still_2_should_balance(void){
+  
+  setNode(&node16, &node7, &node24, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+  setNode(&node28, &node26, &node30, 'b');
+  setNode(&node20, &node18, &node22, 'b');
+  setNode(&node18, NULL, NULL, 'b');
+  setNode(&node26, NULL, NULL, 'b');
+  setNode(&node30, NULL, NULL, 'b');
+  setNode(&node7, &node4, NULL, 'b');
+  setNode(&node4, &node2, &node6, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node22, root);
+  TEST_ASSERT_EQUAL_NODE(&node7, &node28, 'b', &node22);
+  TEST_ASSERT_EQUAL_NODE(&node4, &node18, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(&node2, &node6, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(&node16, &node20, 'b', &node18);
+  TEST_ASSERT_EQUAL_NODE(&node26, &node30, 'b', &node28);
+  TEST_ASSERT_EQUAL_NODE(&node24, NULL, 'b', &node26);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node24);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node30);
+}
+
+
 // setNode(&node16, &node7, &node24, 'b');
 // setNode(&node7, &node4, &node12, 'b');
 // setNode(&node4, &node2, &node6, 'b');

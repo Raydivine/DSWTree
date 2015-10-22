@@ -196,8 +196,8 @@ void test_dswTreeBalancing_given_lefttSide_height_is_4_and_rightSide_height_is_2
 }
 
 /**       
-*           16        ------>                       16  
-*        /     \                               /          \
+*           16        ------>                      16  
+*        /     \                               /         \
 *       7       24                           7             28
 *     /  \        \                        /  \           / \
 *    4    12      28                     4      12      26  30
@@ -230,18 +230,36 @@ void test_dswTreeBalancing_given_lefttSide_height_is_0_and_rightSide_height_is_s
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node24);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node30);
 }
-// setNode(&node16, &node7, &node24, 'b');
-// setNode(&node7, &node4, &node12, 'b');
-// setNode(&node4, &node2, &node6, 'b');
-// setNode(&node12, &node10, &node14, 'b');
-// setNode(&node24, &node20, &node28, 'b');
-// setNode(&node20, &node18, &node22, 'b');
-// setNode(&node28, &node26, &node30, 'b');
-// setNode(&node2, NULL, NULL, 'b');
-// setNode(&node6, NULL, NULL, 'b');
-// setNode(&node10, NULL, NULL, 'b');
-// setNode(&node14, NULL, NULL, 'b');
-// setNode(&node18, NULL, NULL, 'b');
-// setNode(&node22, NULL, NULL, 'b');
-// setNode(&node26, NULL, NULL, 'b');
-// setNode(&node30, NULL, NULL, 'b');
+
+/**       
+*           16      
+*        /     \                       
+*       7        24                        
+*     /  \      /  \                     
+*    4    12   20   28                   
+*   / \   / \                   
+*  2  6  10  14                 
+*
+*/
+void test_dswTreeBalancing_given_lefttSide_height_is_4_and_rightSide_height_is_3_should_not_balannce_because_it_full_fill_the_feature(void){
+  
+  setNode(&node16, &node7, &node24, 'b');;
+  setNode(&node7, &node4, &node12, 'b');
+  setNode(&node4, &node2, &node6, 'b');
+  setNode(&node12, &node10, &node14, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node16, root);
+  TEST_ASSERT_EQUAL_NODE(&node7, &node24, 'b', &node16);
+  TEST_ASSERT_EQUAL_NODE(&node4, &node12, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(&node2, &node6, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(&node10, &node14, 'b', &node12);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node2);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node10);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node14);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node28);
+}
