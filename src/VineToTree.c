@@ -7,8 +7,14 @@
 
 void rightVineToTree(Node **rightVine){
   Node *root = *rightVine;
-  int i, j , n = getNumNodes(root), m = pow( 2, floor(log2(n+1))) -1;
+  int n = getNumNodes(root), m = pow(2, floor(log2(n+1)))- 1 ;
 
+  compress( &root, n-m );
+  
+  while( m>1 ){
+    m = floor( m/2 );
+    compress( &root, m );
+  }
 
   *rightVine = root;
 }
