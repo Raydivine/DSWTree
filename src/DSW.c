@@ -5,6 +5,10 @@
 #include <stdio.h>
 
 void dswTreeBalancing(Node **rootPtr){
+  Node *root = *rootPtr;
   
+  treeToRightVine(&root);
+  rightVineToTree(&root);
   
+  *rootPtr = root;
 }

@@ -19,7 +19,7 @@ void setUp(void)	{
 	resetNode(&node8, 8);
 	resetNode(&node9, 9);
 	resetNode(&node10, 10);
-	resetNode(&node10, 15);
+	resetNode(&node15, 15);
 }
 
 void tearDown(void){}
