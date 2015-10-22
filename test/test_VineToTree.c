@@ -183,11 +183,11 @@ void test_rightVineToTree_given_Vine_has_5_node_should_form_tree(void){
 *                 = 3
 *
 *                       c1(3)                 c2(1)
-*   1(R)                  2(R)                      4
+*   1(R)                  2(R)                  4
 *    \                   /  \                 /   \  
 *     2        ---->    1    4       ---->  2      6
 *      \                    / \            / \    /
-*       3(R)                   3   6          1   3   5
+*       3(R)               3   6          1   3   5
 *        \                    /                         
 *         4                  5                         
 *          \
@@ -218,15 +218,15 @@ void test_rightVineToTree_given_Vine_has_6_node_should_form_tree_and_do_step_2ti
 *                 = 7
 *
 *                       c2(3)                   c2(1)
-*    1                    2                       4
+*   1(R)                  2(R)                    4
 *    \                  /  \                    /   \  
 *     2        ---->   1    4      ---->      2      6
 *      \                   / \               / \    / \
-*       3                 3   6             1   3  5   7 
-*        \                  /  \                         
-*         4               5     7                                 
+*       3(R)               3  6             1   3  5   7 
+*        \                   /  \                         
+*         4                 5    7                                 
 *          \                                             
-*           5                                              
+*           5(R)                                                
 *            \                  
 *             6
 *              \
@@ -259,42 +259,49 @@ void test_rightVineToTree_given_Vine_has_7_node_should_form_tree_and_do_step_2ti
 *                 = 7      
 *                                  
 *                        c1(2)                c2(3)                   c2(1)
-*   1                     2                    4                        6
+*   1(R)                  2(R)                 4(R)                     6
 *    \                  /   \                /   \                    /   \
-*     2      ----->    1     4     ----->   2      6        ----->   4      7
+*     2      ----->    1     4  ----->      2      6        ----->   4      8
 *      \                    / \            / \    /  \              / \    / \
-*       3                  3   5          1   3  5    8            2   5  8   9
+*       3(R)               3   5(R)       1   3  5    8            2   5  7   9
 *        \                      \                    / \          / \
 *         4                      6                  7    9       1   3             
 *          \                     \
-*           5                     7
+*           5                     7(R)
 *            \                     \          
 *             6                     8
 *              \                     \
 *               7                     9
 *                \
-*                 9
-*
+*                 8
+*                  \     
+*                   9
+*               
 */
-void xtest_rightVineToTree_given_Vine_has_9_node_should_form_tree_and_do_step_2times(void){
+void test_rightVineToTree_given_Vine_has_9_node_should_form_tree_and_do_step_2times(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
   setNode(&node4, NULL, &node5, 'b');
   setNode(&node5, NULL, &node6, 'b');
   setNode(&node6, NULL, &node7, 'b');
-  setNode(&node7, NULL, NULL, 'b');
+  setNode(&node7, NULL, &node8, 'b');
+  setNode(&node8, NULL, &node9, 'b');
+  setNode(&node9, NULL, NULL, 'b');
   Node *vine = &node1;
 
   rightVineToTree(&vine);
-  TEST_ASSERT_EQUAL_PTR(&node4, vine);
-  TEST_ASSERT_EQUAL_NODE(&node2, &node6, 'b', &node4);
-  TEST_ASSERT_EQUAL_NODE(&node1, &node3, 'b', &node2);
-  TEST_ASSERT_EQUAL_NODE(&node5, &node7 , 'b', &node6);
+  printVine(vine);
+  TEST_ASSERT_EQUAL_PTR(&node6, vine);
+  TEST_ASSERT_EQUAL_NODE(&node4, &node8, 'b', &node6);
+  TEST_ASSERT_EQUAL_NODE(&node2, &node5, 'b', &node4);
+  TEST_ASSERT_EQUAL_NODE(&node7, &node9 , 'b', &node8);
+  TEST_ASSERT_EQUAL_NODE(&node1, &node3 , 'b', &node2);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node3);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node5);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node7);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node9);
 }
 
 
