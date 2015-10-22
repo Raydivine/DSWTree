@@ -42,36 +42,6 @@ void _compress(Node **rootPtr, int times){
   else 
     _compress( &((*rootPtr)->right), times-1);  
 }  
-  
-  
-/*
-void compress(Node **rootPtr, int times){
-  int i;
-  Node *root = *rootPtr, *current;
-  
-  if(times >0){
-    leftRotate(&root);
-    current = root->right;
-  }
-   
-  for(i=1; i<times; i++){
-    leftRotate(&current);
-    replaceRightEndToNewNode( &root, current);
-    current = current->right;
-  }
-  *rootPtr = root;
-}
-
-void replaceRightEndToNewNode(Node **rootPtr, Node *newNode){
-  Node *root = *rootPtr;
-    
-	if(root == NULL || root->right == NULL){
-		*rootPtr = newNode;
-		return;
-	}
-  else
-    replaceRightEndToNewNode( &root->right, newNode);
-  
-}*/
+ 
 
 
