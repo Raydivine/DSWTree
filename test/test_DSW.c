@@ -153,7 +153,7 @@ void test_dswTreeBalancing_given_rightSide_has_higher_height_with_3_node_should_
 *      20    28       16    
 *                      This is the output feathre of this DSW function, 
 *                      leftSide's height is always equal or higher 1 compare to the rightSide's height
-*                      So the output balanced tree will look like it place all the nodes starting from the left to the right 
+*                      So the output balanced tree will look like it  place the nodes from the left to right 
 *
 */
 void test_dswTreeBalancing_given_rightSide_has_higher_height_with_4_node_should_balance(void){
@@ -199,6 +199,102 @@ void test_dswTreeBalancing_given_rightSide_has_higher_height_with_5_node_should_
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node20);
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
 }
+
+/**       
+*       16        ------>        22    
+*         \                   /     \
+*         24                 18       28
+*        /  \               /  \     /
+*      20    28           16   20   24
+*     / \
+*    18 22
+*
+*/
+void test_dswTreeBalancing_given_rightSide_has_higher_height_with_6_node_should_balance(void){
+  
+  setNode(&node16, NULL, &node24, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+  setNode(&node28, NULL, NULL, 'b');
+  setNode(&node20, &node18, &node22, 'b');
+  setNode(&node18, NULL, NULL, 'b');
+  setNode(&node22, NULL, NULL, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node22, root);
+  TEST_ASSERT_EQUAL_NODE(&node18, &node28, 'b', &node22);
+  TEST_ASSERT_EQUAL_NODE(&node16, &node20, 'b', &node18);
+  TEST_ASSERT_EQUAL_NODE(&node24, NULL, 'b', &node28);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node24);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
+}
+
+/**       
+*       16        ------>         22    
+*         \                    /     \
+*         24                 18       26
+*        /  \               /  \     /  \
+*      20     28           16   20  24  28
+*     / \    /
+*    18 22  26
+*
+*/
+void test_dswTreeBalancing_given_rightSide_has_higher_height_with_7_node_should_balance(void){
+  
+  setNode(&node16, NULL, &node24, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+  setNode(&node28, &node26, NULL, 'b');
+  setNode(&node20, &node18, &node22, 'b');
+  setNode(&node18, NULL, NULL, 'b');
+  setNode(&node26, NULL, NULL, 'b');
+  setNode(&node22, NULL, NULL, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node22, root);
+  TEST_ASSERT_EQUAL_NODE(&node18, &node26, 'b', &node22);
+  TEST_ASSERT_EQUAL_NODE(&node16, &node20, 'b', &node18);
+  TEST_ASSERT_EQUAL_NODE(&node24, &node28, 'b', &node26);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node28);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node24);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
+}
+
+/**       
+*       16        ------>         24    
+*         \                    /     \
+*         24                 20       28
+*        /  \               /  \     /  \
+*      20     28           18   22  26  30
+*     / \    /  \         /
+*    18 22  26  30       16
+*
+*/
+void test_dswTreeBalancing_given_rightSide_has_higher_height_with_8_node_should_balance(void){
+  
+  setNode(&node16, NULL, &node24, 'b');
+  setNode(&node24, &node20, &node28, 'b');
+  setNode(&node28, &node26, &node30, 'b');
+  setNode(&node20, &node18, &node22, 'b');
+  setNode(&node18, NULL, NULL, 'b');
+  setNode(&node26, NULL, NULL, 'b');
+  setNode(&node30, NULL, NULL, 'b');
+
+	Node *root = &node16;
+  dswTreeBalancing(&root);
+  TEST_ASSERT_EQUAL_PTR(&node24, root);
+  TEST_ASSERT_EQUAL_NODE(&node20, &node28, 'b', &node24);
+  TEST_ASSERT_EQUAL_NODE(&node18, &node22, 'b', &node20);
+  TEST_ASSERT_EQUAL_NODE(&node26, &node30, 'b', &node28);
+  TEST_ASSERT_EQUAL_NODE(&node16, NULL, 'b', &node18);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node26);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node30);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node22);
+  TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node16);
+}
+
 // setNode(&node16, &node7, &node24, 'b');
 // setNode(&node7, &node4, &node12, 'b');
 // setNode(&node4, &node2, &node6, 'b');
