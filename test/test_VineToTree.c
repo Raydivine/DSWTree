@@ -50,6 +50,7 @@ void tearDown(void){}
 *
 * Second compress : c2(m) , where m = m /2 
 *
+*  leftRotation  :  R  
 */
 
 
@@ -79,8 +80,8 @@ void test_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
 *                 = 1
 *
 *               c1(1) 
-*     1            2                    
-*     \   --     /      
+*    1(R)         2                    
+*     \   -->    /      
 *      2        1                 
 */
 void test_rightVineToTree_given_Vine_has_2_node_should_do_leftRotation_once(void){
@@ -98,7 +99,7 @@ void test_rightVineToTree_given_Vine_has_2_node_should_do_leftRotation_once(void
 *                 = 3
 *
 *                                    c2(1)
-*   1                                 2
+*   1(R)                               2
 *    \                              /   \
 *     2        ---->              1       3
 *      \
@@ -123,7 +124,7 @@ void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
 *                 = 3
 *
 *                            c1(1)                          c2(1)
-*   1                         2                              3
+*   1(R)                      2(R)                           3
 *    \                      /   \                         /    \
 *     2        ---->       1     3          ---->       2      4 
 *      \                          \                    /
@@ -150,11 +151,11 @@ void test_rightVineToTree_given_Vine_has_4_node_should_form_tree_and_left_Rotate
 *                 = 3
 *
 *                         c1(2)                c2(1)
-*   1                     2                       4
+*   1(R)                  2(R)                    4
 *    \                  /  \                    /   \
 *     2        ---->   1    4       ---->     2      5
 *      \                   / \              / \
-*       3                 3   5            1   3
+*       3(R)              3   5            1   3
 *        \                         
 *         4                     
 *          \
@@ -182,15 +183,15 @@ void test_rightVineToTree_given_Vine_has_5_node_should_form_tree(void){
 *                 = 3
 *
 *                       c1(3)                 c2(1)
-*   1                     2                     4
+*   1(R)                  2(R)                      4
 *    \                   /  \                 /   \  
 *     2        ---->    1    4       ---->  2      6
 *      \                    / \            / \    /
-*       3                  3   6          1   3   5
+*       3(R)                   3   6          1   3   5
 *        \                    /                         
 *         4                  5                         
 *          \
-*           5
+*           5(R) 
 *            \
 *             6
 */
@@ -213,23 +214,26 @@ void test_rightVineToTree_given_Vine_has_6_node_should_form_tree_and_do_step_2ti
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node5);
 }
 
-/**                                             1st time                                             2nd time  
-*    1                    2                       2                            4                        4
-*    \         LR(root) /  \        LR(rChild)  /   \       LR(root)         /  \      LR(rChild)     /   \  
-*     2        ---->   1    3       ---->     1       4     ----->          2     5    ----->        2      6
-*      \                     \                       / \                  /  \     \                / \    / \
-*       3                     4                     3   5                1   3      6              1   3  5   7 
-*        \                     \                         \                           \
-*         4                     5                         6                           7            
-*          \                     \                         \
-*           5                     7                         7
+/**  n = 7,     m = 2^[Floor(log2 (7+1))] - 1 
+*                 = 7
+*
+*                       c2(3)                   c2(1)
+*    1                    2                       4
+*    \                  /  \                    /   \  
+*     2        ---->   1    4      ---->      2      6
+*      \                   / \               / \    / \
+*       3                 3   6             1   3  5   7 
+*        \                  /  \                         
+*         4               5     7                                 
+*          \                                             
+*           5                                              
 *            \                  
 *             6
 *              \
 *               7
 *
 */
-void xtest_rightVineToTree_given_Vine_has_7_node_should_form_tree_and_do_step_2times(void){
+void test_rightVineToTree_given_Vine_has_7_node_should_form_tree_and_do_step_2times(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -251,14 +255,17 @@ void xtest_rightVineToTree_given_Vine_has_7_node_should_form_tree_and_do_step_2t
 }
 
 
-/**                                          
-*    1                    2                            4                        6
-*    \                  /   \                        /   \                    /   \
-*     2                1     4     ----->          2      6        ----->    4      7
-*      \                    / \                  / \    /  \                / \    / \
-*       3                  3   5                1   3  5   7               2   5  8   9
-*        \                      \                         / \             / \
-*         4                     6                       8    9           1   3             
+/**  n = 9,     m = 2^[Floor(log2 (9+1))] - 1 
+*                 = 7      
+*                                  
+*                        c1(2)                c2(3)                   c2(1)
+*   1                     2                    4                        6
+*    \                  /   \                /   \                    /   \
+*     2      ----->    1     4     ----->   2      6        ----->   4      7
+*      \                    / \            / \    /  \              / \    / \
+*       3                  3   5          1   3  5    8            2   5  8   9
+*        \                      \                    / \          / \
+*         4                      6                  7    9       1   3             
 *          \                     \
 *           5                     7
 *            \                     \          
