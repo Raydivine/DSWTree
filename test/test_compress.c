@@ -54,7 +54,7 @@ void tearDown(void){}
 *               7
 *
 */
-void xtest_compress_given_Vine_has_7_node_and_compress_0_times_should_no_compress(void){
+void test_compress_given_Vine_has_7_node_and_compress_0_times_should_no_compress(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -91,7 +91,7 @@ void xtest_compress_given_Vine_has_7_node_and_compress_0_times_should_no_compres
 *               7
 *
 */
-void xtest_compress_given_Vine_has_7_node_and_compress_1_times_should_change(void){
+void test_compress_given_Vine_has_7_node_and_compress_1_times_should_change(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');
@@ -128,7 +128,7 @@ void xtest_compress_given_Vine_has_7_node_and_compress_1_times_should_change(voi
 *               7
 *
 */
-void test_compress_given_Vine_has_7_node_and_compress_2_times_should_change(void){
+void xtest_compress_given_Vine_has_7_node_and_compress_2_times_should_change(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, &node4, 'b');

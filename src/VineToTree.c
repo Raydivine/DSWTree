@@ -34,19 +34,14 @@ void printVine(Node *root){
 
 void compress(Node **rootPtr, int times){
   int i;
-  //Node *root = *rootPtr;
-  
-  for(i=0; i<times;i++){
-    _compress( &(*rootPtr), i - 1 );
-  }
-  
  
-  
- // *rootPtr = root;
+  for(i=0; i<times;i++){
+    _compress( &(*rootPtr), i );
+  }
 }  
 
 void _compress(Node **rootPtr, int times){
-   //printVine((*rootPtr));
+ 
   if(times ==0){
     leftRotate(&(*rootPtr));
     return;
@@ -58,7 +53,7 @@ void _compress(Node **rootPtr, int times){
   }
   
 }  
-  
+    //printVine((*rootPtr));
   
   
 /*
