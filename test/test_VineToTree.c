@@ -24,7 +24,16 @@ void setUp(void)	{
 
 void tearDown(void){}
 
-// Test Termv: LR(root)  = leftRotate(root),  LR(rChild) = LeftRotate(rigthChild)
+/**    void rightVineToTree(Node **rightVine)
+*      
+*      Convert the in-order list to a balanced tree, it has a sub function call compress(), 
+*      which is doing leftRotation from top to Bottom.
+*      How to do the compress() , is follow the DSW algorithm solution
+*      This function reference is taking from this site
+*      http://courses.cs.vt.edu/cs2604/spring05/mcpherson/note/BalancingTrees.pdf
+*      which locate at page 7 , under createPerfectTree()
+*
+*/
 
 
 // NULL
@@ -35,8 +44,12 @@ void test_rightVineToTree_given_Vine_is_NULL_should_do_nothing(void){
   TEST_ASSERT_NULL(vine);
 }
 
-// 1 
-void xtest_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
+/**  n = 1,     m = 2^[Floor(log2 (1+1))] - 1 
+*                 = 1
+*
+*   1 
+*/
+void test_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
   setNode(&node1, NULL, NULL, 'b');
   Node *vine = &node1;
 
@@ -45,11 +58,15 @@ void xtest_rightVineToTree_given_Vine_has_1_node_should_do_nothing(void){
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
-/**  1                                
-*     \            
-*      2                       
+/**  n = 2,     m = 2^[Floor(log2 (2+1))] - 1 
+*                 = 1
+*
+*
+*     1            2                    
+*     \   --     /      
+*      2        1                 
 */
-void xtest_rightVineToTree_given_Vine_has_2_node_should_do_nothing_becuz_it_is_balance(void){
+void test_rightVineToTree_given_Vine_has_2_node_should_do_leftRotation_once(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, NULL, 'b');
   Node *vine = &node1;
@@ -60,14 +77,18 @@ void xtest_rightVineToTree_given_Vine_has_2_node_should_do_nothing_becuz_it_is_b
   TEST_ASSERT_EQUAL_NODE(NULL, NULL, 'b', &node1);
 }
 
-/** 1                                 2
-*    \       LR(root)               /   \
+/**  n = 3,     m = 2^[Floor(log2 (3+1))] - 1 
+*                 = 2
+*
+*
+*   1                                 2
+*    \                              /   \
 *     2        ---->              1       3
 *      \
 *       3
 *          
 */
-void xtest_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
+void test_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
   setNode(&node1, NULL, &node2, 'b');
   setNode(&node2, NULL, &node3, 'b');
   setNode(&node3, NULL, NULL, 'b');
@@ -81,8 +102,12 @@ void xtest_rightVineToTree_given_Vine_has_3_node_should_form_tree(void){
 
 }
 
-/** 1                         2                              2
-*    \         LR(root)     /   \          LR(rChild)     /    \
+/**  n = 4,     m = 2^[Floor(log2 (n+1))] - 1 
+*                 = 3
+*
+*
+*   1                         2                              2
+*    \                      /   \                         /    \
 *     2        ---->       1     3          ---->       1       4 
 *      \                          \                            /
 *       3                         4                           3

@@ -19,20 +19,6 @@ void rightVineToTree(Node **rightVine){
   *rightVine = root;
 }
 
-
-void printVine(Node *root){
-  while(root!=NULL){
-    printf("root =%d  ", root->data);
-    if(root->left)
-        printf("leftChild =%d  ", (root->left)->data);
-    if(root->right)
-        printf("rightChild =%d  ", (root->right)->data);
-    printf("\n");
-    root = root->right;
-  }
-}
-
-
 void compress(Node **rootPtr, int times){
   int i;
  
@@ -48,6 +34,18 @@ void _compress(Node **rootPtr, int times){
   else 
     _compress( &((*rootPtr)->right), times-1);  
 }  
+
+void printVine(Node *root){
+  while(root!=NULL){
+    printf("root =%d  ", root->data);
+    if(root->left)
+        printf("leftChild =%d  ", (root->left)->data);
+    if(root->right)
+        printf("rightChild =%d  ", (root->right)->data);
+    printf("\n");
+    root = root->right;
+  }
+}
  
 
 
